@@ -8,7 +8,8 @@ group = "org.kmp.playground.event.management.full.stack"
 version = "1.0.0"
 application {
     mainClass.set("org.kmp.playground.event.management.full.stack.ApplicationKt")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
+    applicationDefaultJvmArgs =
+        listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
 
 dependencies {
@@ -16,6 +17,10 @@ dependencies {
     implementation(libs.logback)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.json)
     testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
+
+    // MongoDB
+    implementation(libs.mongodb.driver)
 }
