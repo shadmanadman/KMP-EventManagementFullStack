@@ -3,8 +3,15 @@ package org.kmp.playground.event.management.full.stack.db
 import com.mongodb.kotlin.client.coroutine.MongoClient
 import com.mongodb.kotlin.client.coroutine.MongoDatabase
 
-fun getDatabase(): MongoDatabase {
-    return MongoClient.create(
-        "mongodb://localhost:27017"
-    ).getDatabase("appDatabase")
+object DatabaseHelper{
+    private val client: MongoClient by lazy {
+        MongoClient.create("mongodb://localhost:27017")
+    }
+    fun getDatabase(): MongoDatabase {
+        return client.getDatabase("appDatabase")
+    }
+
+    fun closeConnection() {
+        client.close()
+    }
 }
