@@ -12,9 +12,9 @@ fun main() {
 }
 
 fun Application.module() {
+    environment.config.port
     routing {
         get("/") {
-            call.respondText("Ktor: ${Greeting().greet()}")
         }
     }
 }
