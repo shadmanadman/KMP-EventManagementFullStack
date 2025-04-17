@@ -12,7 +12,6 @@ fun main() {
 }
 
 fun Application.module() {
-    environment.config.port
     routing {
         get("/") {
         }
