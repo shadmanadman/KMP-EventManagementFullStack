@@ -5,16 +5,14 @@ import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.domain.entity.Artists
 import org.kmp.playground.event.management.full.stack.domain.entity.Events
 
+interface EventsRepo {
+    suspend fun findAll(): List<Events>?
 
-interface ArtistRepo {
+    suspend fun findById(objectId: ObjectId): Events?
 
-    suspend fun findAll(): List<Artists>?
-
-    suspend fun findById(objectId: ObjectId): Artists?
-
-    suspend fun insertOne(artists: Artists): BsonValue?
+    suspend fun insertOne(events: Events): BsonValue?
 
     suspend fun deleteById(objectId: ObjectId): Long
 
-    suspend fun updateOne(objectId: ObjectId, artists: Artists): Long
+    suspend fun updateOne(objectId: ObjectId, events: Events): Long
 }

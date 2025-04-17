@@ -10,26 +10,26 @@ import kotlinx.coroutines.flow.toList
 import org.bson.BsonValue
 import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.domain.entity.Artists
-import org.kmp.playground.event.management.full.stack.domain.ports.ArtistRepo
+import org.kmp.playground.event.management.full.stack.domain.entity.Events
+import org.kmp.playground.event.management.full.stack.domain.ports.EventsRepo
 
-class ArtistRepoImpl(private val mongoDatabase: MongoDatabase) : ArtistRepo {
+class EventsRepoImpl (private val mongoDatabase: MongoDatabase):EventsRepo{
     companion object {
-        const val ARTISTS_COLLECTION = "artists"
+        const val EVENTS_COLLECTION = "events"
     }
+    override suspend fun findAll(): List<Events> =
+    mongoDatabase.getCollection<Events>(EVENTS_COLLECTION).find().toList()
 
-    override suspend fun findAll(): List<Artists> =
-        mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).find().toList()
 
-    override suspend fun findById(objectId: ObjectId): Artists? =
-        mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).withDocumentClass<Artists>()
+    override suspend fun findById(objectId: ObjectId): Events? =
+        mongoDatabase.getCollection<Artists>(EVENTS_COLLECTION).withDocumentClass<Events>()
             .find(Filters.eq("_id", objectId))
             .firstOrNull()
 
-
-    override suspend fun insertOne(artists: Artists): BsonValue? {
+    override suspend fun insertOne(events: Events): BsonValue? {
         try {
-            val result = mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION).insertOne(
-                artists
+            val result = mongoDatabase.getCollection<Events>(EVENTS_COLLECTION).insertOne(
+                events
             )
 
             return result.insertedId
@@ -42,7 +42,7 @@ class ArtistRepoImpl(private val mongoDatabase: MongoDatabase) : ArtistRepo {
 
     override suspend fun deleteById(objectId: ObjectId): Long {
         try {
-            val result = mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION)
+            val result = mongoDatabase.getCollection<Events>(EVENTS_COLLECTION)
                 .deleteOne(Filters.eq("_id", objectId))
             return result.deletedCount
         } catch (e: MongoException) {
@@ -52,18 +52,21 @@ class ArtistRepoImpl(private val mongoDatabase: MongoDatabase) : ArtistRepo {
         return 0
     }
 
-    override suspend fun updateOne(objectId: ObjectId, artists: Artists): Long {
+    override suspend fun updateOne(objectId: ObjectId, events: Events): Long {
         try {
             val query = Filters.eq("_id", objectId)
             val updates = Updates.combine(
-                Updates.set(Artists::artistName.name, artists.artistName),
-                Updates.set(Artists::artistAvatar.name, artists.artistAvatar)
+                Updates.set(Events::eventName.name, events.eventName),
+                Updates.set(Events::eventDate.name, events.eventDate),
+                Updates.set(Events::location.name, events.location),
+                Updates.set(Events::coverImage.name, events.coverImage),
+                Updates.set(Events::eventTime.name, events.eventTime)
             )
 
             val options = UpdateOptions().upsert(true)
 
             val result =
-                mongoDatabase.getCollection<Artists>(ARTISTS_COLLECTION)
+                mongoDatabase.getCollection<Events>(EVENTS_COLLECTION)
                     .updateOne(query, updates, options)
 
             return result.modifiedCount
