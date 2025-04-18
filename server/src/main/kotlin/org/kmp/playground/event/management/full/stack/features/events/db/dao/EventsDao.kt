@@ -4,7 +4,7 @@ import org.bson.BsonValue
 import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.features.events.db.entity.Events
 
-interface EventsRepo {
+interface EventsDao {
     suspend fun findAll(): List<Events>?
 
     suspend fun findById(objectId: ObjectId): Events?

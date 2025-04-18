@@ -10,11 +10,10 @@ import kotlinx.coroutines.flow.toList
 import org.bson.BsonValue
 import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.features.artists.db.entity.Artists
-import org.kmp.playground.event.management.full.stack.features.events.db.dao.EventsRepoImpl
 import org.kmp.playground.event.management.full.stack.features.events.db.entity.Events
 import org.kmp.playground.event.management.full.stack.features.users.db.entity.Users
 
-class UsersRepoImpl (private val mongoDatabase: MongoDatabase):UsersRepo{
+class UsersDaoImpl (private val mongoDatabase: MongoDatabase):UsersDao{
     companion object {
         const val USERS_COLLECTION = "users"
     }
@@ -66,7 +65,7 @@ class UsersRepoImpl (private val mongoDatabase: MongoDatabase):UsersRepo{
             val options = UpdateOptions().upsert(true)
 
             val result =
-                mongoDatabase.getCollection<Events>(EventsRepoImpl.Companion.EVENTS_COLLECTION)
+                mongoDatabase.getCollection<Events>(USERS_COLLECTION)
                     .updateOne(query, updates, options)
 
             return result.modifiedCount

@@ -11,7 +11,7 @@ import org.bson.BsonValue
 import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.features.artists.db.entity.Artists
 
-class ArtistRepoImpl(private val mongoDatabase: MongoDatabase) : ArtistDao {
+class ArtistDaoImpl(private val mongoDatabase: MongoDatabase) : ArtistDao {
     companion object {
         const val ARTISTS_COLLECTION = "artists"
     }

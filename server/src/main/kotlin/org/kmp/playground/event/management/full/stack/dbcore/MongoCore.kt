@@ -1,4 +1,4 @@
-package org.kmp.playground.event.management.full.stack.db
+package org.kmp.playground.event.management.full.stack.dbcore
 
 import com.mongodb.kotlin.client.coroutine.MongoClient
 import com.mongodb.kotlin.client.coroutine.MongoDatabase

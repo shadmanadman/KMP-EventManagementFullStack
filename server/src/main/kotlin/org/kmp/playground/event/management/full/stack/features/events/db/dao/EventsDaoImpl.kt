@@ -12,7 +12,7 @@ import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.features.artists.db.entity.Artists
 import org.kmp.playground.event.management.full.stack.features.events.db.entity.Events
 
-class EventsRepoImpl (private val mongoDatabase: MongoDatabase):EventsRepo{
+class EventsDaoImpl (private val mongoDatabase: MongoDatabase):EventsDao{
     companion object {
         const val EVENTS_COLLECTION = "events"
     }
