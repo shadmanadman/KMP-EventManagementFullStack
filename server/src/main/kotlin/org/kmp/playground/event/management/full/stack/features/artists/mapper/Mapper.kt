@@ -7,11 +7,11 @@ import org.kmp.playground.event.management.full.stack.features.artists.db.entity
 import org.kmp.playground.event.management.full.stack.features.artists.db.entity.EventArtists
 
 
-fun EventArtistsRequest.toDomain() = EventArtists(
+fun EventArtistsRequest.toEntity() = EventArtists(
     eventArtistId = ObjectId(),
     eventId = ObjectId(this.eventId),
     artistId = ObjectId(this.artistId)
 )
 
-fun ArtistsRequest.toDomain() =
+fun ArtistsRequest.toEntity() =
     Artists(artistId = ObjectId(), artistName = this.artistName, artistAvatar = this.artistAvatar)

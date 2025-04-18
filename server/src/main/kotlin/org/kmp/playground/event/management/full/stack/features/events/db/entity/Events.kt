@@ -4,6 +4,7 @@ import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 import org.kmp.playground.event.management.full.stack.domain.models.events.request.EventRegistrationRequest
 import org.kmp.playground.event.management.full.stack.domain.models.events.request.EventRequest
+import org.kmp.playground.event.management.full.stack.domain.models.events.response.EventResponse
 import java.time.LocalDateTime
 
 data class Events(
@@ -16,7 +17,18 @@ data class Events(
     val description: String?,
     val capacity: Int?,
     val coverImage: String?
-)
+) {
+    fun toResponse() = EventResponse(
+        id = eventId.toString(),
+        eventName = eventName,
+        eventDate = eventDate,
+        eventTime = eventTime,
+        location = location,
+        description = description,
+        capacity = capacity,
+        coverImage = coverImage
+    )
+}
 
 data class EventRegistrations(
     @BsonId
