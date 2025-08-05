@@ -21,6 +21,7 @@ decompose = "3.3.0"
 decompose-essenty = "2.5.0"
 mongodb-driver = "4.10.1"
 gson = "2.10.1"
+graphql-kotlin = "7.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -60,6 +61,8 @@ decompose-essenty = {module="com.arkivanov.essenty:lifecycle",version.ref = "dec
 
 #MongoDB
 mongodb-driver = {module = "org.mongodb:mongodb-driver-kotlin-coroutine", version.ref = "mongodb-driver" }
+#GraphQL
+graphql-kotlin-server = { module = "com.expediagroup:graphql-kotlin-server", version.ref = "graphql-kotlin" }
 
 # Gson
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }

@@ -23,4 +23,5 @@ dependencies {
 
     // MongoDB
     implementation(libs.mongodb.driver)
+    implementation(libs.graphql.kotlin.server)
 }
